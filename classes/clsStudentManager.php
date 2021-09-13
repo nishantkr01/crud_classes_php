@@ -118,4 +118,31 @@ class clsStudentManager
         }
         return $lNumTuples;
     }
+
+    //----
+    
+    function UpdateUserDetails($ObjUserRegistrationMaster, $myConn=null)
+    {
+        $UserID = $ObjUserRegistrationMaster->getUserID();
+        $UserName = $ObjUserRegistrationMaster->getName();
+        $Password = $ObjUserRegistrationMaster->getPassword();
+        $ContactNo = $ObjUserRegistrationMaster->getContactNo();
+        $IsActive = $ObjUserRegistrationMaster->getIsActive();
+        
+        $sQuery = "update userdetails set name='$UserName',password='$Password',contactno=$ContactNo,isactive='$IsActive' where id=$UserID";
+    
+        if(is_resource($myConn) and get_resource_type($myConn)== 'pgsql link')
+        {
+            $Result = pg_exec($myConn,$sQuery) or die ("Couldn't execute query in clsUserRegistrationManager:UpdateUserDetails");
+            $lNumTuples = pg_cmdtuples($Result);
+        }
+        else
+        {
+            include("../dbconnect.php");
+            $Result = pg_exec($connection,$sQuery) or die ("Couldn't execute query in clsUserRegistrationManager:UpdateUserDetails");
+            $lNumTuples = pg_cmdtuples($Result);
+            pg_close();
+        }
+        return $lNumTuples;
+    }
 }

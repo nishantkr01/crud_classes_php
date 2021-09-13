@@ -77,7 +77,7 @@
                     $firstPage = 1;
                     $nextPage = $currentPage + 1;
                     $previousPage = $currentPage - 1;
-                    $Query = "SELECT * FROM stud_regd ORDER BY stud_id OFFSET  $startFrom LIMIT  $showRecordPerPage";
+                    $Query = "SELECT * FROM stud_regd ORDER BY stud_id desc OFFSET  $startFrom LIMIT  $showRecordPerPage";
                     $clsStudentSet = new clsStudentSet();
                     $clsStudentManager = new clsStudentManager();
 
@@ -105,7 +105,7 @@
                                 <td><img style=" width: 60px;  height: 60px; border-radius: 50px; object-fit: cover;" src="image/<?php echo $ObjStud_data->getStud_photo(); ?>"></td>
                                 <!-- <td><a  href="update.php?userid=<?php echo $ObjStud_data->getStud_id(); ?>" class="btn btn-primary btn-sm">Update</a> <a href="delete.php?userid=<?php echo $ObjStud_data->getStud_id; ?>" class="btn btn-danger btn-sm">Delete</a></td> -->
 
-                                <td><a href="update.php?userid=<?php echo $ObjStud_data->getStud_id(); ?>" class="btn btn-primary btn-sm">Update</a> <a href="views/student/delete.php?userid=<?php echo $ObjStud_data->getStud_id(); ?>&photo=<?php echo $ObjStud_data->getStud_photo(); ?>" onclick='return checkdelete()' class="btn btn-danger btn-sm">Delete</a></td>
+                                <td><a href="views/student/update.php?userid=<?php echo $ObjStud_data->getStud_id(); ?>" class="btn btn-primary btn-sm">Update</a> <a href="views/student/delete.php?userid=<?php echo $ObjStud_data->getStud_id(); ?>&photo=<?php echo $ObjStud_data->getStud_photo(); ?>" onclick='return checkdelete()' class="btn btn-danger btn-sm">Delete</a></td>
                             </tr>
                     <?php
                         }
