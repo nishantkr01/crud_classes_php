@@ -65,12 +65,16 @@ class clsStudentManager
 
     function RetrieveUserSet($sQuery)
     {
-        include("./dbconnect.php");
+   
+            include("./dbconnect.php");
+            // include("../../dbconnect.php");
+        
 
         $clsStudentSet = new clsStudentSet();
 
         $rsltAllSUser = pg_exec($connection, $sQuery) or die("Couldn't execute query in clsUserRegistrationManager:RetrieveUserSet.");
         $lNumRows = pg_numrows($rsltAllSUser);
+        // echo $lNumRows;
         if ($lNumRows == 0) {
             pg_close();
             return $clsStudentSet;
@@ -121,15 +125,18 @@ class clsStudentManager
 
     //----
     
-    function UpdateUserDetails($ObjUserRegistrationMaster, $myConn=null)
+    function UpdateUserDetails($ObjStud_data, $myConn=null)
     {
-        $UserID = $ObjUserRegistrationMaster->getUserID();
-        $UserName = $ObjUserRegistrationMaster->getName();
-        $Password = $ObjUserRegistrationMaster->getPassword();
-        $ContactNo = $ObjUserRegistrationMaster->getContactNo();
-        $IsActive = $ObjUserRegistrationMaster->getIsActive();
+         
+        $stud_id = $ObjStud_data->getStud_id();
+        $regDate = $ObjStud_data->getStud_regd_date();
+        $stud_name = $ObjStud_data->getStud_name();
+        $dob = $ObjStud_data->getStud_dob();
+        $gender = $ObjStud_data->getStud_gender();
+        $stud_mobile = $ObjStud_data->getStud_mobile();
+        $filename = $ObjStud_data->getStud_photo();
         
-        $sQuery = "update userdetails set name='$UserName',password='$Password',contactno=$ContactNo,isactive='$IsActive' where id=$UserID";
+        $sQuery = "update stud_regd set stud_regd_date='$regDate',stud_name='$stud_name', stud_dob='$dob', stud_gender='$gender', stud_mobile='$stud_mobile', stud_photo='$filename' where stud_id='$stud_id'";
     
         if(is_resource($myConn) and get_resource_type($myConn)== 'pgsql link')
         {

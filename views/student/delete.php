@@ -1,5 +1,5 @@
 <?php
-
+error_reporting(0);
         // include_once 'database.php';
             $stud_id = $_GET["userid"];
             $stud_photo = $_GET["photo"];
